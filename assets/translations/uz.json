@@ -1,4 +1,11 @@
 {
   "select_lang": "Tilni tanlang",
-  "login": "Kirish"
+  "login": "Kirish",
+  "candidate_id": "Nomzod IDsi",
+  "exam_taken": "Siz oldin imtihon topshirgansiz",
+  "failed_auth": "Kirishda xatolik",
+  "to_home": "Bosh sahifa",
+  "exam_success": "Tabriklaymiz, siz imtihondan muvaffaqqiyatli o'tdingiz",
+  "exam_fail": "Afsuski siz imtihondan o'ta olmadingiz",
+  "time_remain": "Imithon yakunlanishiga {} vaqt qoldi"
 }

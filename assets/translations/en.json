@@ -1,4 +1,11 @@
 {
   "select_lang": "Choose the language",
-  "login": "Login"
+  "login": "Login",
+  "candidate_id": "Candidate ID",
+  "exam_taken": "You have already taken the exam",
+  "failed_auth": "Auth failed",
+  "to_home": "Home page",
+  "exam_success": "Congratulations, you successfully passed the exam",
+  "exam_fail": "Unfortunately, you failed the exam",
+  "time_remain": "{} time remaining to finish the exam"
 }
