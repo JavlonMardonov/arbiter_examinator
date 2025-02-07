@@ -20,7 +20,7 @@ class AuthRepo {
     log("data in data source: $candidate_number");
 
     final url = NetworkConstants.authUrl;
-    final data = {``
+    final data = {
       "candidate_number": candidate_number,
     };
 
