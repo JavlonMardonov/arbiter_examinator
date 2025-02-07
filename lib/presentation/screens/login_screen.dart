@@ -15,7 +15,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _controller = TextEditingController();
-  String? _selectedLanguage = "Uzbek";
 
   final Map<String, String> _flags = {
     "English": "🇬🇧",
@@ -28,6 +27,20 @@ class _LoginScreenState extends State<LoginScreen> {
     "Русский": "ru",
     "English": "en",
   };
+
+  String? _selectedLanguage;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final currentLocale = context.locale.languageCode;
+      _selectedLanguage = _languages.entries
+          .firstWhere((entry) => entry.value == currentLocale)
+          .key;
+      setState(() {});
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     TextField(
                       controller: _controller,
                       decoration: InputDecoration(
-                        labelText: "Username",
+                        labelText: "candidate_id".tr(),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8),
                         ),
@@ -97,48 +110,52 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 20),
                     Consumer<AuthProvider>(
-                      builder: (context, authProvider, child) {
-                        return ElevatedButton(
-                          onPressed: _selectedLanguage != null &&
-                                  _controller.text.isNotEmpty
-                              ? () async {
-                                  await authProvider.login(
-                                      candidate_number:
-                                          _controller.text.trim());
-                                  if (authProvider.message
-                                      .contains("succesfuly")) {
-                                    Navigator.pushReplacement(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const HomeScreen()),
+                        builder: (context, authProvider, child) {
+                      return ValueListenableBuilder(
+                        valueListenable: _controller,
+                        builder: (context, value, child) {
+                          return ElevatedButton(
+                            onPressed: _selectedLanguage != null &&
+                                    _controller.text.isNotEmpty
+                                ? () async {
+                                    await authProvider.login(
+                                        candidate_number:
+                                            _controller.text.trim());
+                                    if (authProvider.message
+                                        .contains("succesfuly")) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const HomeScreen()),
+                                      );
+                                    }
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          authProvider.message.toString(),
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                        backgroundColor: Colors.red,
+                                      ),
                                     );
                                   }
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        authProvider.message.toString(),
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                      backgroundColor: Colors.red,
-                                    ),
-                                  );
-                                }
-                              : null,
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: Size(width, 50),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
+                                : null,
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(width, 50),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                             ),
-                          ),
-                          child: authProvider.isLoading
-                              ? CircularProgressIndicator(
-                                  color: Colors.blueGrey,
-                                )
-                              : Text("Login"),
-                        );
-                      },
-                    ),
+                            child: authProvider.isLoading
+                                ? CircularProgressIndicator(
+                                    color: Colors.blueGrey,
+                                  )
+                                : Text("login".tr()),
+                          );
+                        },
+                      );
+                    }),
                   ],
                 ),
               ),
