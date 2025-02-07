@@ -25,7 +25,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     return result.fold(
       (error) => message = error,
-      (_) => message = "success_auth".tr(),
+      (_) => message = "succesfuly",
     );
   }
 
@@ -38,7 +38,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     return result?.fold(
       (error) => message = error,
-      (_) => message = "success_auth".tr(),
+      (_) => message = "succesfuly",
     );
   }
 }
