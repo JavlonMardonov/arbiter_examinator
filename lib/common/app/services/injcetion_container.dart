@@ -1,5 +1,7 @@
-import 'package:arbiter_examinator/data/models/profile/repositories/auth_repo.dart';
+import 'package:arbiter_examinator/data/models/profile/repositories/quiz_repo.dart';
+import 'package:arbiter_examinator/data/repositories/auth_repo.dart';
 import 'package:arbiter_examinator/provider/auth_provider.dart';
+import 'package:arbiter_examinator/provider/quiz_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +22,12 @@ Future<void> authInit() async {
   getIt
     ..registerLazySingleton<AuthProvider>(
       () => AuthProvider(getIt()),
+    )
+    ..registerLazySingleton<QuizProvider>(
+      () => QuizProvider(getIt()),
+    )
+    ..registerLazySingleton<QuizRepo>(
+      () => QuizRepo(),
     )
     ..registerLazySingleton<AuthRepo>(
       () => AuthRepo(),

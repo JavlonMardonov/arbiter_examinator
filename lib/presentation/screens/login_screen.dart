@@ -1,6 +1,7 @@
 import 'dart:developer';
 
-import 'package:arbiter_examinator/presentation/screens/home_screen.dart';
+import 'package:arbiter_examinator/data/models/profil_model.dart';
+import 'package:arbiter_examinator/presentation/screens/exam_screen.dart';
 import 'package:arbiter_examinator/provider/auth_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -42,17 +43,29 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  void _showDialog() {
+  void _showDialog(ProfileData data) {
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           title: Text("Info"),
-          content: Text("You have already taken the exam."),
+          content: Text(data.isExamTaken == true
+              ? "exam_taken".tr()
+              : "${data.exam?.name} ni boshlashga tayyormisiz?"),
           actions: [
             TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text("OK"),
+              onPressed: () {
+                if (data.isExamTaken != true) {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ExamScreen(profileData: data)),
+                  );
+                } else {
+                  Navigator.pop(context);
+                }
+              },
+              child: Text(data.isExamTaken != true ? "Start exam" : "Cancel"),
             ),
           ],
         );
@@ -145,12 +158,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         log("${authProvider.user?.data?.fio}");
                                         if (authProvider.message
                                             .contains("success")) {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const HomeScreen()),
-                                          );
+                                          _showDialog(authProvider.user!.data!);
                                         }
                                         ScaffoldMessenger.of(context)
                                             .showSnackBar(
@@ -185,16 +193,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                     : Text("login".tr()),
                               ),
                               const SizedBox(height: 10),
-                              ElevatedButton(
-                                onPressed: _showDialog,
-                                style: ElevatedButton.styleFrom(
-                                  minimumSize: Size(width, 50),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                                child: Text("Show Dialog"),
-                              ),
                             ],
                           );
                         },

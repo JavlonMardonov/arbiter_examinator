@@ -1,6 +1,5 @@
 import 'dart:developer';
-
-import '../data/models/profile/repositories/auth_repo.dart';
+import 'package:arbiter_examinator/data/repositories/auth_repo.dart';
 import 'package:arbiter_examinator/data/models/profil_model.dart';
 import 'package:flutter/material.dart';
 

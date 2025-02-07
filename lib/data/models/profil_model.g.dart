@@ -9,7 +9,7 @@ part of 'profil_model.dart';
 ProfilModel _$ProfilModelFromJson(Map<String, dynamic> json) => ProfilModel(
       data: json['data'] == null
           ? null
-          : Data.fromJson(json['data'] as Map<String, dynamic>),
+          : ProfileData.fromJson(json['data'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ProfilModelToJson(ProfilModel instance) =>
@@ -17,7 +17,7 @@ Map<String, dynamic> _$ProfilModelToJson(ProfilModel instance) =>
       'data': instance.data,
     };
 
-Data _$DataFromJson(Map<String, dynamic> json) => Data(
+ProfileData _$DataFromJson(Map<String, dynamic> json) => ProfileData(
       id: json['_id'] as String?,
       fio: json['fio'] as String?,
       candidateNumber: json['candidate_number'] as String?,
@@ -35,7 +35,7 @@ Data _$DataFromJson(Map<String, dynamic> json) => Data(
       lastExamResult: (json['last_exam_result'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$DataToJson(Data instance) => <String, dynamic>{
+Map<String, dynamic> _$DataToJson(ProfileData instance) => <String, dynamic>{
       '_id': instance.id,
       'fio': instance.fio,
       'candidate_number': instance.candidateNumber,

@@ -223,7 +223,7 @@
                                                 <action selector="toggleAutomaticLinkDetection:" target="-1" id="Gip-E3-Fov"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem title="Data Detectors" id="tRr-pd-1PS">
+                                        <menuItem title="ProfileData Detectors" id="tRr-pd-1PS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="toggleAutomaticDataDetection:" target="-1" id="R1I-Nq-Kbl"/>

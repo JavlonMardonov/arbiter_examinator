@@ -1,6 +1,7 @@
 import 'package:arbiter_examinator/common/app/services/injcetion_container.dart';
 import 'package:arbiter_examinator/presentation/screens/login_screen.dart';
 import 'package:arbiter_examinator/provider/auth_provider.dart';
+import 'package:arbiter_examinator/provider/quiz_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => getIt<AuthProvider>(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => getIt<QuizProvider>(),
         )
       ],
       child: MaterialApp(
