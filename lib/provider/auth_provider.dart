@@ -33,7 +33,7 @@ class AuthProvider extends ChangeNotifier {
     final result = await authRepo.getProfile();
     isLoading = false;
     notifyListeners();
-    return result.fold(
+    return result?.fold(
       (error) => message = error,
       (_) => message = "Login succesfuly",
     );
