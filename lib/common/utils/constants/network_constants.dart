@@ -11,6 +11,6 @@ class NetworkConstants {
   // quiz url
 
   static String quizUrl(String id) {
-    return "$baseUrl/api/exams/${id}/quizzes";
+    return "$baseUrl/api/exams/$id/quizzes";
   }
 }
