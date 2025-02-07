@@ -11,7 +11,7 @@ class QuizProvider extends ChangeNotifier {
 
   bool isLoading = false;
   String message = '';
-  QuizResponse? user;
+  QuizResponse? quiz;
 
   Future<void> getQuiz(String examId) async {
     isLoading = true;
@@ -22,7 +22,7 @@ class QuizProvider extends ChangeNotifier {
     notifyListeners();
     return result?.fold(
       (error) => message = error,
-      (_) => user = _,
+      (_) => quiz = _,
     );
   }
 }
