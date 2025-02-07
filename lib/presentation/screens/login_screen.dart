@@ -19,11 +19,11 @@ class _LoginScreenState extends State<LoginScreen> {
   final Map<String, String> _flags = {
     "English": "🇬🇧",
     "Русский": "🇷🇺",
-    "Uzbek": "🇺🇿",
+    "O'zbekcha": "🇺🇿",
   };
 
   final Map<String, String> _languages = {
-    "Uzbek": "uz",
+    "O'zbekcha": "uz",
     "Русский": "ru",
     "English": "en",
   };

@@ -3,6 +3,7 @@
   "login": "Login",
   "candidate_id": "Candidate ID",
   "exam_taken": "You have already taken the exam",
+  "success_auth": "Auth Successfully",
   "failed_auth": "Auth failed",
   "to_home": "Home page",
   "exam_success": "Congratulations, you successfully passed the exam",

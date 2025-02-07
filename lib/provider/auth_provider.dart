@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:arbiter_examinator/data/models/profil_model.dart';
 import 'package:arbiter_examinator/data/repositories/auth_repo.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class AuthProvider extends ChangeNotifier {
@@ -24,7 +25,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     return result.fold(
       (error) => message = error,
-      (_) => message = "Login succesfuly",
+      (_) => message = "success_auth".tr(),
     );
   }
 
@@ -37,7 +38,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     return result?.fold(
       (error) => message = error,
-      (_) => user = _,
+      (_) => message = "success_auth".tr(),
     );
   }
 }

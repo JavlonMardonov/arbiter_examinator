@@ -3,6 +3,7 @@
   "login": "Kirish",
   "candidate_id": "Nomzod IDsi",
   "exam_taken": "Siz oldin imtihon topshirgansiz",
+  "success_auth": "Muvaffaqqiyatli kirish",
   "failed_auth": "Kirishda xatolik",
   "to_home": "Bosh sahifa",
   "exam_success": "Tabriklaymiz, siz imtihondan muvaffaqqiyatli o'tdingiz",
