@@ -124,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     await authProvider.profile();
                                     log("${authProvider.user?.data?.fio}");
                                     if (authProvider.message
-                                        .contains("succesfuly")) {
+                                        .contains("success")) {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -135,10 +135,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          authProvider.message.toString(),
+                                          authProvider.message.toString() ==
+                                                  "success"
+                                              ? "success_auth".tr()
+                                              : "failed_auth".tr(),
                                           style: TextStyle(color: Colors.white),
                                         ),
-                                        backgroundColor: Colors.red,
+                                        backgroundColor: authProvider.message
+                                                .contains("success")
+                                            ? Colors.green
+                                            : Colors.red,
                                       ),
                                     );
                                   }
