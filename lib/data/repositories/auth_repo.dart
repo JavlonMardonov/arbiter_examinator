@@ -5,6 +5,7 @@ import 'package:arbiter_examinator/common/app/services/injcetion_container.dart'
 import 'package:arbiter_examinator/common/exeptions/custom_exception.dart';
 import 'package:arbiter_examinator/common/utils/constants/network_constants.dart';
 import 'package:arbiter_examinator/common/utils/constants/prefs_keys.dart';
+import 'package:arbiter_examinator/data/models/profil_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -45,5 +46,26 @@ class AuthRepo {
       throw ServerException(
           errorMessage: "Please try again later.", statusCode: 500);
     }
+  }
+
+  Future<Either<dynamic, ProfilModel?>?> getProfile() async {
+    final String? token =
+        getIt<SharedPreferences>().getString(PrefsKeys.tokenKey);
+
+    try {
+      final response = await dio.get(NetworkConstants.profleUrl,
+          options: Options(headers: {"Authorization": "Bearer $token"}));
+      if (response.statusCode == 200) {
+        final payload = response.data;
+        return Right(ProfilModel.fromJson(payload));
+      }
+    } catch (e) {
+      Left("Error happened while enter profile");
+      throw ServerException(
+        errorMessage: "Error happened while fetching banners",
+        statusCode: 500,
+      );
+    }
+    return null;
   }
 }

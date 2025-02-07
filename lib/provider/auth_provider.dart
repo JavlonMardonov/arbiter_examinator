@@ -19,9 +19,20 @@ class AuthProvider extends ChangeNotifier {
     log("data in usecase: $candidate_number,");
     final result = await authRepo.login(candidate_number: candidate_number);
     isLoading = false;
-
     notifyListeners();
+    return result.fold(
+      (error) => message = error,
+      (_) => message = "Login succesfuly",
+    );
+  }
 
+  Future<void> profile() async {
+    isLoading = true;
+    notifyListeners();
+    log("data in usecase: ");
+    final result = await authRepo.getProfile();
+    isLoading = false;
+    notifyListeners();
     return result.fold(
       (error) => message = error,
       (_) => message = "Login succesfuly",

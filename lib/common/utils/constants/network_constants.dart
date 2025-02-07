@@ -6,7 +6,7 @@ class NetworkConstants {
   static String authUrl = "$baseUrl/api/auth/signin";
 
   // banner url
-  static String bannerUrl = "$baseUrl/api/banner";
+  static String profleUrl = "$baseUrl/api/profile/me";
   // banner url
-  static String cardUrl = "$baseUrl/api/products";
+  // static String cardUrl = "$baseUrl/api/products";
 }
