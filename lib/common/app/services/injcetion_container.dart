@@ -1,4 +1,4 @@
-import 'package:arbiter_examinator/data/repositories/auth_repo.dart';
+import 'package:arbiter_examinator/data/models/profile/repositories/auth_repo.dart';
 import 'package:arbiter_examinator/provider/auth_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';

@@ -8,7 +8,6 @@ import 'package:arbiter_examinator/common/utils/constants/prefs_keys.dart';
 import 'package:arbiter_examinator/data/models/profil_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepo {

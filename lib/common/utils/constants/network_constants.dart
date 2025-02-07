@@ -5,8 +5,12 @@ class NetworkConstants {
   // auth url
   static String authUrl = "$baseUrl/api/auth/signin";
 
-  // banner url
+  // profile url
   static String profleUrl = "$baseUrl/api/profile/me";
-  // banner url
-  // static String cardUrl = "$baseUrl/api/products";
+
+  // quiz url
+
+  static String quizUrl(String id) {
+    return "$baseUrl/api/exams/${id}/quizzes";
+  }
 }

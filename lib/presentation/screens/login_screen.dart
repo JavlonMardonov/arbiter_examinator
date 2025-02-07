@@ -102,7 +102,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       onChanged: (String? newValue) {
                         setState(() {
                           _selectedLanguage = newValue;
-                          // log(.toString());
                           Locale newLocale = Locale(_languages[newValue]!);
                           context.setLocale(newLocale);
                         });
