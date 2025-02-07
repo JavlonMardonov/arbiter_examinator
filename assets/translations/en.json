@@ -11,5 +11,11 @@
   "time_remain": "{} time remaining to finish the exam",
   "all_questions":"All questions : {}",
   "correct_answers":"Correct answers : {}",
-  "result":"Result"
+  "result":"Result",
+  "exam":"Exam",
+  "next_question":"Next question",
+  "submit_exam":"Submit exam",
+  "-quiz":"{}-question",
+  "start":"Start",
+  "cancel":"Back"
 }

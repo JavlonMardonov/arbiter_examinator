@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:arbiter_examinator/data/models/profil_model.dart';
+import 'package:arbiter_examinator/data/models/profile/profil_model.dart';
 import 'package:arbiter_examinator/presentation/screens/exam_screen.dart';
 import 'package:arbiter_examinator/provider/auth_provider.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -48,10 +48,22 @@ class _LoginScreenState extends State<LoginScreen> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("Info"),
-          content: Text(data.isExamTaken == true
-              ? "exam_taken".tr()
-              : "${data.exam?.name} ni boshlashga tayyormisiz?"),
+          title: data.isExamTaken == true
+              ? Icon(Icons.cancel, color: Colors.red, size: 50)
+              : Icon(Icons.check_circle, color: Colors.green, size: 50),
+          titlePadding: EdgeInsets.all(10),
+          content: data.isExamTaken == true
+              ? Text("exam_taken".tr())
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("exam".tr()),
+                    Text(
+                      "${data.exam?.name}",
+                      style: TextStyle(fontSize: 24),
+                    )
+                  ],
+                ),
           actions: [
             TextButton(
               onPressed: () {

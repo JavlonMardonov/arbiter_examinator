@@ -1,8 +1,9 @@
 import 'package:arbiter_examinator/common/app/services/injcetion_container.dart';
-import 'package:arbiter_examinator/data/models/profil_model.dart';
+import 'package:arbiter_examinator/data/models/profile/profil_model.dart';
 import 'package:arbiter_examinator/presentation/screens/result_screen.dart';
 import 'package:arbiter_examinator/presentation/widgets/checkbox_widget.dart';
 import 'package:arbiter_examinator/provider/quiz_provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -59,7 +60,10 @@ class _ExamScreenState extends State<ExamScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Exam")),
+      appBar: AppBar(
+        title: Text("exam".tr()),
+        automaticallyImplyLeading: false,
+      ),
       body: Consumer<QuizProvider>(
         builder: (context, quizProvider, child) {
           if (quizProvider.isLoading) {
@@ -76,7 +80,8 @@ class _ExamScreenState extends State<ExamScreen> {
                   questionNumber: (currentIndex + 1).toString(),
                   isNextQuizAvailable: currentIndex < quizData.length - 1,
                   onPrimaryButtonTap: (selectedOptions) {
-                    nextQuestion(quizProvider, selectedOptions.map((e) => e.id).toList());
+                    nextQuestion(quizProvider,
+                        selectedOptions.map((e) => e.id).toList());
                   },
                 ),
               ),

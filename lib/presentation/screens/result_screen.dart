@@ -1,6 +1,9 @@
+import 'package:arbiter_examinator/common/utils/constants/prefs_keys.dart';
+import 'package:arbiter_examinator/presentation/screens/login_screen.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/animation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ResultScreen extends StatefulWidget {
   final int trueAnswers;
@@ -21,7 +24,7 @@ class _ResultScreenState extends State<ResultScreen>
   @override
   void initState() {
     super.initState();
-
+    clearToken();
     isSuccess = (widget.trueAnswers / widget.allQuestions) >= 0.8;
 
     _controller = AnimationController(
@@ -37,10 +40,18 @@ class _ResultScreenState extends State<ResultScreen>
     _controller.forward();
   }
 
+  Future<void> clearToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(PrefsKeys.tokenKey);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("result".tr())),
+      appBar: AppBar(
+        title: Text("result".tr()),
+        automaticallyImplyLeading: false,
+      ),
       body: Center(
         child: SlideTransition(
           position: _slideAnimation,
@@ -72,6 +83,19 @@ class _ResultScreenState extends State<ResultScreen>
                     color: isSuccess ? Colors.green : Colors.red,
                   ),
                 ),
+                SizedBox(
+                  height: 30,
+                ),
+                ElevatedButton(
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.white),
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
+                    },
+                    child: Text("to_home".tr()))
               ],
             ),
           ),

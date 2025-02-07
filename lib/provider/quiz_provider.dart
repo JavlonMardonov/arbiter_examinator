@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:arbiter_examinator/data/models/profile/repositories/quiz_repo.dart';
+import 'package:arbiter_examinator/data/repositories/quiz_repo.dart';
 import 'package:arbiter_examinator/data/models/quiz/quiz_data.dart';
 import 'package:flutter/material.dart';
 

@@ -5,7 +5,7 @@ import 'package:arbiter_examinator/common/app/services/injcetion_container.dart'
 import 'package:arbiter_examinator/common/exeptions/custom_exception.dart';
 import 'package:arbiter_examinator/common/utils/constants/network_constants.dart';
 import 'package:arbiter_examinator/common/utils/constants/prefs_keys.dart';
-import 'package:arbiter_examinator/data/models/profil_model.dart';
+import 'package:arbiter_examinator/data/models/profile/profil_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -35,11 +35,11 @@ class AuthRepo {
             PrefsKeys.tokenKey, response.data["data"]["access_token"]);
         log(response.data["data"]["access_token"]);
       }
-      return Right("Login SUccesfully" );
+      return Right("Login Succesfully");
     } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw ServerException(errorMessage: "Not Found", statusCode: 404);
-      }
+      // if (e.response?.statusCode == 404) {
+      //   throw ServerException(errorMessage: "Not Found", statusCode: 404);
+      // }
       log("Error happened: while logging in: $e");
       return Left("Not found");
     } catch (e) {

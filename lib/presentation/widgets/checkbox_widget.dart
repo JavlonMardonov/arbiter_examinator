@@ -1,5 +1,6 @@
 import 'package:arbiter_examinator/data/models/quiz/option_data.dart';
 import 'package:arbiter_examinator/data/models/quiz/quiz_data.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CheckboxWidget extends StatefulWidget {
@@ -43,16 +44,31 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "${widget.questionNumber}-savol",
+            // "${widget.questionNumber}-savol",
+            "-quiz".tr(args: [(widget.questionNumber)]),
             style: TextStyle(
               color: Colors.grey[900],
             ),
           ),
           const SizedBox(height: 8),
-          Text(
-            widget.quiz.question.content,
-            style: TextStyle(
-              color: Colors.grey[900],
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: Row(
+                  children: [
+                    Text(
+                      widget.quiz.question.content,
+                      style: TextStyle(color: Colors.grey[900], fontSize: 22),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 16),
@@ -87,26 +103,37 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
               },
             ),
           ),
-          ElevatedButton(
-              onPressed: (widget.quiz.quizType == QuizType.singleSelect &&
-                          _selectedOption != null) ||
-                      (widget.quiz.quizType == QuizType.multiSelect &&
-                          _selectedOptions.isNotEmpty)
-                  ? () {
-                      widget.onPrimaryButtonTap(
-                          widget.quiz.quizType == QuizType.singleSelect
-                              ? [_selectedOption!]
-                              : _selectedOptions);
-                    }
-                  : null,
-              child: Container(
-                child: Text(
-                  widget.isNextQuizAvailable ? "Keyingi savol" : "Yakunlash",
-                  style: TextStyle(
-                    color: Colors.white,
+          Row(
+            children: [
+              Spacer(),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green,
+                    // padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+                    // textStyle:
+                    //     TextStyle(fontSize: 30, fontWeight: FontWeight.bold)
                   ),
-                ),
-              )),
+                  onPressed: (widget.quiz.quizType == QuizType.singleSelect &&
+                              _selectedOption != null) ||
+                          (widget.quiz.quizType == QuizType.multiSelect &&
+                              _selectedOptions.isNotEmpty)
+                      ? () {
+                          widget.onPrimaryButtonTap(
+                              widget.quiz.quizType == QuizType.singleSelect
+                                  ? [_selectedOption!]
+                                  : _selectedOptions);
+                        }
+                      : null,
+                  child: Text(
+                    widget.isNextQuizAvailable
+                        ? "next_question".tr()
+                        : "submit_exam".tr(),
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  )),
+            ],
+          ),
           const SizedBox(height: 50)
         ],
       ),
@@ -215,9 +242,10 @@ class _OptionCheckboxItemState extends State<_OptionCheckboxItem> {
                   side: MaterialStateBorderSide.resolveWith(
                     (states) => BorderSide(
                       width: 1,
-                      color: Colors.grey[50]!,
+                      color: Colors.blueGrey,
                     ),
                   ),
+                  activeColor: Colors.blueGrey,
                   value: _isSelected,
                   onChanged: (_) {
                     setState(() {

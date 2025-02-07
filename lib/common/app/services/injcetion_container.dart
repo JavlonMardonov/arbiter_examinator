@@ -1,4 +1,4 @@
-import 'package:arbiter_examinator/data/models/profile/repositories/quiz_repo.dart';
+import 'package:arbiter_examinator/data/repositories/quiz_repo.dart';
 import 'package:arbiter_examinator/data/repositories/auth_repo.dart';
 import 'package:arbiter_examinator/provider/auth_provider.dart';
 import 'package:arbiter_examinator/provider/quiz_provider.dart';

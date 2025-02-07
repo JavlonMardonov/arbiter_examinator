@@ -11,5 +11,11 @@
   "time_remain": "Imithon yakunlanishiga {} vaqt qoldi",
   "all_questions":"Barcha savollar : {}",
   "correct_answers":"To'g'ri javoblar : {}",
-  "result":"Natija"
+  "result":"Natija",
+  "exam":"Imtihon",
+  "next_question":"Keyingi savol",
+  "submit_exam":"Imithonni yakunlash",
+  "-quiz":"{}-savol",
+  "start":"Boshlash",
+  "cancel":"Ortga qaytish"
 }
