@@ -38,7 +38,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     return result?.fold(
       (error) => message = error,
-      (_) => message = "succesfuly",
+      (_) => user = _,
     );
   }
 }
