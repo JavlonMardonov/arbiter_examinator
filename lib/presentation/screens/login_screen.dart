@@ -141,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             candidate_number:
                                                 _controller.text.trim());
 
-                                        // await authProvider.profile();
+                                        await authProvider.profile();
                                         log("${authProvider.user?.data?.fio}");
                                         if (authProvider.message
                                             .contains("success")) {

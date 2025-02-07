@@ -8,5 +8,8 @@
   "to_home": "Home page",
   "exam_success": "Congratulations, you successfully passed the exam",
   "exam_fail": "Unfortunately, you failed the exam",
-  "time_remain": "{} time remaining to finish the exam"
+  "time_remain": "{} time remaining to finish the exam",
+  "all_questions":"All questions : {}",
+  "correct_answers":"Correct answers : {}",
+  "result":"Result"
 }

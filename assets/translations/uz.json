@@ -8,5 +8,8 @@
   "to_home": "Bosh sahifa",
   "exam_success": "Tabriklaymiz, siz imtihondan muvaffaqqiyatli o'tdingiz",
   "exam_fail": "Afsuski siz imtihondan o'ta olmadingiz",
-  "time_remain": "Imithon yakunlanishiga {} vaqt qoldi"
+  "time_remain": "Imithon yakunlanishiga {} vaqt qoldi",
+  "all_questions":"Barcha savollar : {}",
+  "correct_answers":"To'g'ri javoblar : {}",
+  "result":"Natija"
 }
