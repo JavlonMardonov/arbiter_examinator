@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:arbiter_examinator/data/models/profil_model.dart';
 import 'package:arbiter_examinator/data/repositories/auth_repo.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +11,7 @@ class AuthProvider extends ChangeNotifier {
 
   bool isLoading = false;
   String message = '';
+  ProfilModel? user;
 
   Future<void> login({
     required String candidate_number,
@@ -35,7 +37,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
     return result?.fold(
       (error) => message = error,
-      (_) => message = "Login succesfuly",
+      (_) => user = _,
     );
   }
 }

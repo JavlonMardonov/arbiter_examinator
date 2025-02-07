@@ -121,6 +121,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                     await authProvider.login(
                                         candidate_number:
                                             _controller.text.trim());
+
+                                    await authProvider.profile();
+                                    log("${authProvider.user?.data?.fio}");
                                     if (authProvider.message
                                         .contains("succesfuly")) {
                                       Navigator.pushReplacement(
