@@ -37,9 +37,9 @@ class AuthRepo {
       }
       return Right("Login SUccesfully" ?? "Error");
     } on DioException catch (e) {
-      if (e.response?.statusCode == 404) {
-        throw ServerException(errorMessage: "Not Found", statusCode: 404);
-      }
+      // if (e.response?.statusCode == 404) {
+      //   throw ServerException(errorMessage: "Not Found", statusCode: 404);
+      // }
       log("Error happened: while logging in: $e");
       return Left("Not found");
     } catch (e) {
