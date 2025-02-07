@@ -17,9 +17,9 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _controller = TextEditingController();
 
   final Map<String, String> _flags = {
-    "English": "🇬🇧",
-    "Русский": "🇷🇺",
-    "O'zbekcha": "🇺🇿",
+    "English": "\ud83c\uddec\ud83c\udde7",
+    "Русский": "\ud83c\uddf7\ud83c\uddfa",
+    "O'zbekcha": "\ud83c\uddfa\ud83c\uddff",
   };
 
   final Map<String, String> _languages = {
@@ -40,6 +40,24 @@ class _LoginScreenState extends State<LoginScreen> {
           .key;
       setState(() {});
     });
+  }
+
+  void _showDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Info"),
+          content: Text("You have already taken the exam."),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text("OK"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -113,47 +131,64 @@ class _LoginScreenState extends State<LoginScreen> {
                       return ValueListenableBuilder(
                         valueListenable: _controller,
                         builder: (context, value, child) {
-                          return ElevatedButton(
-                            onPressed: _selectedLanguage != null &&
-                                    _controller.text.isNotEmpty
-                                ? () async {
-                                    await authProvider.login(
-                                        candidate_number:
-                                            _controller.text.trim());
+                          return Column(
+                            children: [
+                              ElevatedButton(
+                                onPressed: _selectedLanguage != null &&
+                                        _controller.text.isNotEmpty
+                                    ? () async {
+                                        await authProvider.login(
+                                            candidate_number:
+                                                _controller.text.trim());
 
-                                    await authProvider.profile();
-                                    log("${authProvider.user?.data?.fio}");
-                                    if (authProvider.message
-                                        .contains("succesfuly")) {
-                                      Navigator.pushReplacement(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const HomeScreen()),
-                                      );
-                                    }
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                          authProvider.message.toString(),
-                                          style: TextStyle(color: Colors.white),
-                                        ),
-                                        backgroundColor: Colors.red,
-                                      ),
-                                    );
-                                  }
-                                : null,
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: Size(width, 50),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8),
+                                        // await authProvider.profile();
+                                        log("${authProvider.user?.data?.fio}");
+                                        if (authProvider.message
+                                            .contains("succesfuly")) {
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const HomeScreen()),
+                                          );
+                                        }
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              authProvider.message.toString(),
+                                              style: TextStyle(
+                                                  color: Colors.white),
+                                            ),
+                                            backgroundColor: Colors.red,
+                                          ),
+                                        );
+                                      }
+                                    : null,
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(width, 50),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                child: authProvider.isLoading
+                                    ? CircularProgressIndicator(
+                                        color: Colors.blueGrey,
+                                      )
+                                    : Text("login".tr()),
                               ),
-                            ),
-                            child: authProvider.isLoading
-                                ? CircularProgressIndicator(
-                                    color: Colors.blueGrey,
-                                  )
-                                : Text("login".tr()),
+                              const SizedBox(height: 10),
+                              ElevatedButton(
+                                onPressed: _showDialog,
+                                style: ElevatedButton.styleFrom(
+                                  minimumSize: Size(width, 50),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                ),
+                                child: Text("Show Dialog"),
+                              ),
+                            ],
                           );
                         },
                       );
