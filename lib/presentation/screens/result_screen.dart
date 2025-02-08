@@ -9,7 +9,7 @@ class ResultScreen extends StatefulWidget {
   final int trueAnswers;
   final int allQuestions;
 
-  const ResultScreen({required this.trueAnswers, required this.allQuestions});
+  const ResultScreen({super.key, required this.trueAnswers, required this.allQuestions});
 
   @override
   _ResultScreenState createState() => _ResultScreenState();

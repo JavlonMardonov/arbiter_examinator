@@ -14,6 +14,8 @@ class SubmitQuizData {
     required this.selectedOptions,
   });
 
+  factory SubmitQuizData.fromJson(Map<String, dynamic> json) => _$SubmitQuizDataFromJson(json);
+
   Map<String, dynamic> toJson() => _$SubmitQuizDataToJson(this);
 
   @override

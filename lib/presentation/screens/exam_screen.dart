@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:arbiter_examinator/common/app/services/injcetion_container.dart';
 import 'package:arbiter_examinator/data/models/profile/profil_model.dart';
+import 'package:arbiter_examinator/data/models/quiz/option_data.dart';
+import 'package:arbiter_examinator/data/models/quiz_submission/submit_quiz_data.dart';
 import 'package:arbiter_examinator/presentation/screens/result_screen.dart';
 import 'package:arbiter_examinator/presentation/widgets/checkbox_widget.dart';
 import 'package:arbiter_examinator/provider/quiz_provider.dart';
@@ -17,8 +21,7 @@ class ExamScreen extends StatefulWidget {
 
 class _ExamScreenState extends State<ExamScreen> {
   int currentIndex = 0;
-  List<Map<String, dynamic>> selectedAnswers = [];
-  int trueAnswers = 0;
+  final List<SubmitQuizData> selectedAnswers = [];
 
   @override
   void initState() {
@@ -26,30 +29,38 @@ class _ExamScreenState extends State<ExamScreen> {
     getIt<QuizProvider>().getQuiz(widget.profileData.exam!.id!);
   }
 
-  void nextQuestion(QuizProvider quizProvider, List<String> selectedOptionIds) {
-    if (selectedOptionIds.isNotEmpty) {
-      for (var optionId in selectedOptionIds) {
-        selectedAnswers.add({
-          "quizId": quizProvider.quiz!.data[currentIndex].id,
-          "optionId": optionId,
-        });
+  Future<void> submit() async {
+    await getIt<QuizProvider>().submitQuiz(
+        examId: widget.profileData.exam!.id!, data: selectedAnswers);
+  }
 
-        // if (quizProvider.quiz.data(quizProvider.quiz!.data[currentIndex], optionId)) {
-        //   trueAnswers++;
-        // }
-      }
-    }
+  Future<void> nextQuestion(
+      QuizProvider quizProvider, List<OptionData> selectedOptions) async {
+    final quizId = quizProvider.quiz!.data[currentIndex].id;
+
+    final selectedOptionsIdList =
+        selectedOptions.map((option) => option.id).toList();
+
+    final currentQuizResult =
+        SubmitQuizData(quizId: quizId, selectedOptions: selectedOptionsIdList);
+
+    selectedAnswers.add(currentQuizResult);
 
     if (currentIndex < quizProvider.quiz!.data.length - 1) {
       setState(() {
         currentIndex++;
       });
     } else {
+      await submit();
+      print(getIt<QuizProvider>().quizResult);
+      print(getIt<QuizProvider>().quizResult?.correctAnswersCount);
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => ResultScreen(
-            trueAnswers: trueAnswers,
+            trueAnswers:
+                getIt<QuizProvider>().quizResult?.correctAnswersCount ?? -1,
             allQuestions: quizProvider.quiz!.data.length,
           ),
         ),
@@ -80,8 +91,7 @@ class _ExamScreenState extends State<ExamScreen> {
                   questionNumber: (currentIndex + 1).toString(),
                   isNextQuizAvailable: currentIndex < quizData.length - 1,
                   onPrimaryButtonTap: (selectedOptions) {
-                    nextQuestion(quizProvider,
-                        selectedOptions.map((e) => e.id).toList());
+                    nextQuestion(quizProvider, selectedOptions);
                   },
                 ),
               ),

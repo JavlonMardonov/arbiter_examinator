@@ -13,4 +13,7 @@ class NetworkConstants {
   static String quizUrl(String id) {
     return "$baseUrl/api/exams/$id/quizzes";
   }
+  static String submitUrl(String id) {
+    return "$baseUrl/api/exams/$id/quizzes/submit";
+  }
 }

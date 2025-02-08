@@ -167,7 +167,7 @@ class _SingleSelectOption extends StatelessWidget {
             children: [
               Radio(
                 activeColor: Colors.blue,
-                fillColor: MaterialStatePropertyAll(
+                fillColor: WidgetStatePropertyAll(
                   selectedOption == currentOption
                       ? Colors.blue
                       : Colors.grey[50],
@@ -239,7 +239,7 @@ class _OptionCheckboxItemState extends State<_OptionCheckboxItem> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  side: MaterialStateBorderSide.resolveWith(
+                  side: WidgetStateBorderSide.resolveWith(
                     (states) => BorderSide(
                       width: 1,
                       color: Colors.blueGrey,
