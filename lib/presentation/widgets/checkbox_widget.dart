@@ -62,9 +62,12 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
                 padding: const EdgeInsets.symmetric(vertical: 10),
                 child: Row(
                   children: [
-                    Text(
-                      widget.quiz.question.content,
-                      style: TextStyle(color: Colors.grey[900], fontSize: 22),
+                    Expanded(
+                      child: Text(
+                        widget.quiz.question.content,
+                        maxLines: 10,
+                        style: TextStyle(color: Colors.grey[900], fontSize: 22),
+                      ),
                     ),
                   ],
                 ),
