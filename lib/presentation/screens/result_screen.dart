@@ -8,8 +8,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class ResultScreen extends StatefulWidget {
   final int trueAnswers;
   final int allQuestions;
+  final int pass_quiz_count;
 
-  const ResultScreen({super.key, required this.trueAnswers, required this.allQuestions});
+  const ResultScreen(
+      {super.key,
+      required this.trueAnswers,
+      required this.allQuestions,
+      required this.pass_quiz_count});
 
   @override
   _ResultScreenState createState() => _ResultScreenState();
@@ -25,7 +30,7 @@ class _ResultScreenState extends State<ResultScreen>
   void initState() {
     super.initState();
     clearToken();
-    isSuccess = (widget.trueAnswers / widget.allQuestions) >= 0.8;
+    isSuccess = widget.trueAnswers >= widget.pass_quiz_count;
 
     _controller = AnimationController(
       duration: Duration(seconds: 2),

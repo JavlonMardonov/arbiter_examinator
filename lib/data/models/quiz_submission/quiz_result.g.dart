@@ -7,8 +7,8 @@ part of 'quiz_result.dart';
 // **************************************************************************
 
 QuizResult _$QuizResultFromJson(Map<String, dynamic> json) => QuizResult(
-      correctAnswersCount: json['total_correct_answer'] as int?,
-      quizPoint: json['quiz_point'] as int?,
+      correctAnswersCount: (json['total_correct_answer'] as num?)?.toInt(),
+      quizPoint: (json['quiz_point'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$QuizResultToJson(QuizResult instance) =>

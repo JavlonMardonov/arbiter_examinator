@@ -18,15 +18,18 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _controller = TextEditingController();
 
   final Map<String, String> _flags = {
-    "English": "\ud83c\uddec\ud83c\udde7",
-    "Русский": "\ud83c\uddf7\ud83c\uddfa",
-    "O'zbekcha": "\ud83c\uddfa\ud83c\uddff",
+    "O'zbekcha": "assets/flags/uz.png",
+    "Криллча": "assets/flags/uz.png",
+    "Русский": "assets/flags/ru.png",
+    // "English": "assets/flags/en.png",
   };
 
   final Map<String, String> _languages = {
     "O'zbekcha": "uz",
+    "Криллча": "en",
     "Русский": "ru",
-    "English": "en",
+    // "Криллча": "cr",
+    // "English": "en",
   };
 
   String? _selectedLanguage;
@@ -77,7 +80,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   Navigator.pop(context);
                 }
               },
-              child: Text(data.isExamTaken != true ? "Start exam" : "Cancel"),
+              child:
+                  Text(data.isExamTaken != true ? "start".tr() : "cancel".tr()),
             ),
           ],
         );
@@ -135,7 +139,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           value: language,
                           child: Row(
                             children: [
-                              Text(_flags[language]!),
+                              SizedBox(
+                                  height: 20,
+                                  child: Image.asset(_flags[language]!)),
                               const SizedBox(width: 8),
                               Text(language),
                             ],

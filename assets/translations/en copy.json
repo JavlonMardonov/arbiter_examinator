@@ -1,0 +1,21 @@
+{
+  "select_lang": "Choose the language",
+  "login": "Login",
+  "candidate_id": "Candidate ID",
+  "exam_taken": "You have already taken the exam",
+  "success_auth": "Auth Successfully",
+  "failed_auth": "Auth failed",
+  "to_home": "Home page",
+  "exam_success": "Congratulations, you successfully passed the exam",
+  "exam_fail": "Unfortunately, you failed the exam",
+  "time_remain": "{} time remaining to finish the exam",
+  "all_questions":"All questions : {}",
+  "correct_answers":"Correct answers : {}",
+  "result":"Result",
+  "exam":"Exam",
+  "next_question":"Next question",
+  "submit_exam":"Submit exam",
+  "-quiz":"{}-question",
+  "start":"Start",
+  "cancel":"Back"
+}

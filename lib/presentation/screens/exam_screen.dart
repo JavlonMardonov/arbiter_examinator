@@ -1,4 +1,4 @@
-import 'dart:developer';
+import 'dart:async';
 
 import 'package:arbiter_examinator/common/app/services/injcetion_container.dart';
 import 'package:arbiter_examinator/data/models/profile/profil_model.dart';
@@ -21,17 +21,59 @@ class ExamScreen extends StatefulWidget {
 
 class _ExamScreenState extends State<ExamScreen> {
   int currentIndex = 0;
+  late int exam_duration = widget.profileData.exam!.duration!;
   final List<SubmitQuizData> selectedAnswers = [];
+  late Timer _timer;
+  late int _remainingTime;
 
   @override
   void initState() {
     super.initState();
     getIt<QuizProvider>().getQuiz(widget.profileData.exam!.id!);
+    _remainingTime = exam_duration;
+    _startTimer();
   }
 
   Future<void> submit() async {
     await getIt<QuizProvider>().submitQuiz(
         examId: widget.profileData.exam!.id!, data: selectedAnswers);
+
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResultScreen(
+          trueAnswers:
+              getIt<QuizProvider>().quizResult?.correctAnswersCount ?? -1,
+          allQuestions: getIt<QuizProvider>().quiz!.data.length,
+          pass_quiz_count: widget.profileData.exam?.passQuizCount ?? 28,
+        ),
+      ),
+    );
+  }
+
+  String _formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int secondsLeft = seconds % 60;
+    return "${minutes.toString().padLeft(2, '0')}:${secondsLeft.toString().padLeft(2, '0')}";
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      setState(() {
+        if (_remainingTime > 0) {
+          _remainingTime--;
+        } else {
+          _timer.cancel();
+          submit();
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
 
   Future<void> nextQuestion(
@@ -52,19 +94,6 @@ class _ExamScreenState extends State<ExamScreen> {
       });
     } else {
       await submit();
-      print(getIt<QuizProvider>().quizResult);
-      print(getIt<QuizProvider>().quizResult?.correctAnswersCount);
-
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ResultScreen(
-            trueAnswers:
-                getIt<QuizProvider>().quizResult?.correctAnswersCount ?? -1,
-            allQuestions: quizProvider.quiz!.data.length,
-          ),
-        ),
-      );
     }
   }
 
@@ -74,6 +103,23 @@ class _ExamScreenState extends State<ExamScreen> {
       appBar: AppBar(
         title: Text("exam".tr()),
         automaticallyImplyLeading: false,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              _formatTime(_remainingTime),
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: _remainingTime <= exam_duration * 0.1
+                      ? Colors.red
+                      : Colors.black),
+            ),
+          ),
+          SizedBox(
+            width: 90,
+          )
+        ],
       ),
       body: Consumer<QuizProvider>(
         builder: (context, quizProvider, child) {

@@ -3,7 +3,6 @@ import 'package:arbiter_examinator/common/app/services/injcetion_container.dart'
 import 'package:arbiter_examinator/common/exeptions/custom_exception.dart';
 import 'package:arbiter_examinator/common/utils/constants/network_constants.dart';
 import 'package:arbiter_examinator/common/utils/constants/prefs_keys.dart';
-import 'package:arbiter_examinator/data/models/profile/profil_model.dart';
 import 'package:arbiter_examinator/data/models/quiz/quiz_data.dart';
 import 'package:arbiter_examinator/data/models/quiz_submission/quiz_result.dart';
 import 'package:arbiter_examinator/data/models/quiz_submission/submit_quiz_data.dart';

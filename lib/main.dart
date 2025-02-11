@@ -12,10 +12,15 @@ void main() async {
   await initInjection();
   runApp(
     EasyLocalization(
-        supportedLocales: [Locale('uz'), Locale('en'), Locale("ru")],
+        supportedLocales: [
+          Locale('uz'),
+          Locale('en'),
+          Locale("ru"),
+          // Locale("cr")
+        ],
         path: 'assets/translations',
         fallbackLocale: Locale('uz'),
-        startLocale: Locale("uz"),
+        startLocale: Locale("en"),
         saveLocale: true,
         child: MyApp()),
   );

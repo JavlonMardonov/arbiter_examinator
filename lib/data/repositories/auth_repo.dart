@@ -60,11 +60,11 @@ class AuthRepo {
         return Right(ProfilModel.fromJson(payload));
       }
     } catch (e) {
-      Left("Error happened while enter profile");
-      throw ServerException(
-        errorMessage: "Error happened while fetching banners",
-        statusCode: 500,
-      );
+      return Left("Error happened while enter profile");
+      // throw ServerException(
+      //   errorMessage: "Error happened while fetching banners",
+      //   statusCode: 500,
+      // );
     }
     return null;
   }

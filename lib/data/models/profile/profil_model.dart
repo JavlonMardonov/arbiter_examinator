@@ -63,9 +63,9 @@ class ProfileData {
   });
 
   factory ProfileData.fromJson(Map<String, dynamic> json) =>
-      _$DataFromJson(json);
+      _$ProfileDataFromJson(json);
 
-  Map<String, dynamic> toJson() => _$DataToJson(this);
+  Map<String, dynamic> toJson() => _$ProfileDataToJson(this);
 }
 
 @JsonSerializable()
@@ -80,6 +80,12 @@ class Exam {
   final String? updatedAt;
   @JsonKey(name: "__v")
   final int? v;
+  @JsonKey(name: "quiz_count_for_candidates")
+  final int? quizCountForCandidates;
+  @JsonKey(name: "duration")
+  final int? duration;
+  @JsonKey(name: "pass_quiz_count")
+  final int? passQuizCount;
 
   Exam({
     this.id,
@@ -87,6 +93,9 @@ class Exam {
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.quizCountForCandidates,
+    this.duration,
+    this.passQuizCount,
   });
 
   factory Exam.fromJson(Map<String, dynamic> json) => _$ExamFromJson(json);

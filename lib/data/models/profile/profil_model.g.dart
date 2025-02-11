@@ -17,7 +17,7 @@ Map<String, dynamic> _$ProfilModelToJson(ProfilModel instance) =>
       'data': instance.data,
     };
 
-ProfileData _$DataFromJson(Map<String, dynamic> json) => ProfileData(
+ProfileData _$ProfileDataFromJson(Map<String, dynamic> json) => ProfileData(
       id: json['_id'] as String?,
       fio: json['fio'] as String?,
       candidateNumber: json['candidate_number'] as String?,
@@ -35,7 +35,8 @@ ProfileData _$DataFromJson(Map<String, dynamic> json) => ProfileData(
       lastExamResult: (json['last_exam_result'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$DataToJson(ProfileData instance) => <String, dynamic>{
+Map<String, dynamic> _$ProfileDataToJson(ProfileData instance) =>
+    <String, dynamic>{
       '_id': instance.id,
       'fio': instance.fio,
       'candidate_number': instance.candidateNumber,
@@ -57,6 +58,10 @@ Exam _$ExamFromJson(Map<String, dynamic> json) => Exam(
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
       v: (json['__v'] as num?)?.toInt(),
+      quizCountForCandidates:
+          (json['quiz_count_for_candidates'] as num?)?.toInt(),
+      duration: (json['duration'] as num?)?.toInt(),
+      passQuizCount: (json['pass_quiz_count'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ExamToJson(Exam instance) => <String, dynamic>{
@@ -65,4 +70,7 @@ Map<String, dynamic> _$ExamToJson(Exam instance) => <String, dynamic>{
       'created_at': instance.createdAt,
       'updated_at': instance.updatedAt,
       '__v': instance.v,
+      'quiz_count_for_candidates': instance.quizCountForCandidates,
+      'duration': instance.duration,
+      'pass_quiz_count': instance.passQuizCount,
     };
